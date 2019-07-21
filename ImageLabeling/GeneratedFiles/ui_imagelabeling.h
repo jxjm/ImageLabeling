@@ -14,16 +14,19 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "imagedisplay.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -34,16 +37,23 @@ public:
     QAction *actionSave;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
-    QListView *imageListView;
-    QScrollArea *scrollArea;
-    QWidget *image_frame;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QLabel *label;
+    QListWidget *listWidget;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QPushButton *dentButton;
     QPushButton *cleanButton;
-    QPushButton *othersButton;
+    QPushButton *dentButton;
     QPushButton *crackButton;
-    QLabel *label_2;
+    QPushButton *othersButton;
+    QVBoxLayout *verticalLayout_2;
+    imageDisplay *image_frame;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QSpacerItem *horizontalSpacer_2;
     QMenuBar *menuBar;
     QMenu *menuSetting;
     QStatusBar *statusBar;
@@ -53,7 +63,7 @@ public:
     {
         if (ImageLabelingClass->objectName().isEmpty())
             ImageLabelingClass->setObjectName(QString::fromUtf8("ImageLabelingClass"));
-        ImageLabelingClass->resize(856, 631);
+        ImageLabelingClass->resize(943, 542);
         actionLoad = new QAction(ImageLabelingClass);
         actionLoad->setObjectName(QString::fromUtf8("actionLoad"));
         actionSave = new QAction(ImageLabelingClass);
@@ -64,25 +74,33 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        imageListView = new QListView(centralWidget);
-        imageListView->setObjectName(QString::fromUtf8("imageListView"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        verticalLayout->addWidget(label);
+
+        listWidget = new QListWidget(centralWidget);
+        new QListWidgetItem(listWidget);
+        QFont font;
+        font.setBold(true);
+        font.setItalic(true);
+        font.setWeight(75);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget);
+        __qlistwidgetitem->setFont(font);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(imageListView->sizePolicy().hasHeightForWidth());
-        imageListView->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(listWidget->sizePolicy().hasHeightForWidth());
+        listWidget->setSizePolicy(sizePolicy);
 
-        gridLayout_2->addWidget(imageListView, 1, 0, 1, 1);
-
-        scrollArea = new QScrollArea(centralWidget);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setWidgetResizable(true);
-        image_frame = new QWidget();
-        image_frame->setObjectName(QString::fromUtf8("image_frame"));
-        image_frame->setGeometry(QRect(0, 0, 573, 554));
-        scrollArea->setWidget(image_frame);
-
-        gridLayout_2->addWidget(scrollArea, 0, 1, 3, 1);
+        verticalLayout->addWidget(listWidget);
 
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -95,49 +113,104 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        dentButton = new QPushButton(groupBox);
-        dentButton->setObjectName(QString::fromUtf8("dentButton"));
+        cleanButton = new QPushButton(groupBox);
+        cleanButton->setObjectName(QString::fromUtf8("cleanButton"));
         QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(dentButton->sizePolicy().hasHeightForWidth());
-        dentButton->setSizePolicy(sizePolicy2);
-
-        gridLayout->addWidget(dentButton, 0, 2, 1, 1);
-
-        cleanButton = new QPushButton(groupBox);
-        cleanButton->setObjectName(QString::fromUtf8("cleanButton"));
         sizePolicy2.setHeightForWidth(cleanButton->sizePolicy().hasHeightForWidth());
         cleanButton->setSizePolicy(sizePolicy2);
 
-        gridLayout->addWidget(cleanButton, 4, 0, 1, 1);
+        gridLayout->addWidget(cleanButton, 1, 0, 1, 1);
 
-        othersButton = new QPushButton(groupBox);
-        othersButton->setObjectName(QString::fromUtf8("othersButton"));
-        sizePolicy2.setHeightForWidth(othersButton->sizePolicy().hasHeightForWidth());
-        othersButton->setSizePolicy(sizePolicy2);
+        dentButton = new QPushButton(groupBox);
+        dentButton->setObjectName(QString::fromUtf8("dentButton"));
+        sizePolicy2.setHeightForWidth(dentButton->sizePolicy().hasHeightForWidth());
+        dentButton->setSizePolicy(sizePolicy2);
+        dentButton->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 255, 0);\n"
+"color: rgb(255, 255, 255);"));
 
-        gridLayout->addWidget(othersButton, 0, 3, 1, 1);
+        gridLayout->addWidget(dentButton, 0, 1, 1, 1);
 
         crackButton = new QPushButton(groupBox);
         crackButton->setObjectName(QString::fromUtf8("crackButton"));
         sizePolicy2.setHeightForWidth(crackButton->sizePolicy().hasHeightForWidth());
         crackButton->setSizePolicy(sizePolicy2);
+        crackButton->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
 
         gridLayout->addWidget(crackButton, 0, 0, 1, 1);
 
+        othersButton = new QPushButton(groupBox);
+        othersButton->setObjectName(QString::fromUtf8("othersButton"));
+        sizePolicy2.setHeightForWidth(othersButton->sizePolicy().hasHeightForWidth());
+        othersButton->setSizePolicy(sizePolicy2);
+        othersButton->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 255);\n"
+"color: rgb(255, 255, 255);"));
 
-        gridLayout_2->addWidget(groupBox, 2, 0, 1, 1);
+        gridLayout->addWidget(othersButton, 0, 2, 1, 1);
 
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        gridLayout_2->addWidget(label_2, 0, 0, 1, 1);
+        verticalLayout->addWidget(groupBox);
+
+
+        horizontalLayout_2->addLayout(verticalLayout);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        image_frame = new imageDisplay(centralWidget);
+        image_frame->setObjectName(QString::fromUtf8("image_frame"));
+        QSizePolicy sizePolicy3(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy3.setHorizontalStretch(100);
+        sizePolicy3.setVerticalStretch(100);
+        sizePolicy3.setHeightForWidth(image_frame->sizePolicy().hasHeightForWidth());
+        image_frame->setSizePolicy(sizePolicy3);
+        image_frame->setAutoFillBackground(false);
+
+        verticalLayout_2->addWidget(image_frame);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy4);
+
+        horizontalLayout->addWidget(pushButton);
+
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        sizePolicy4.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
+        pushButton_2->setSizePolicy(sizePolicy4);
+
+        horizontalLayout->addWidget(pushButton_2);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_2);
+
+
+        gridLayout_2->addLayout(horizontalLayout_2, 0, 0, 1, 1);
 
         ImageLabelingClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ImageLabelingClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 856, 23));
+        menuBar->setGeometry(QRect(0, 0, 943, 23));
         menuSetting = new QMenu(menuBar);
         menuSetting->setObjectName(QString::fromUtf8("menuSetting"));
         ImageLabelingClass->setMenuBar(menuBar);
@@ -153,6 +226,10 @@ public:
         menuSetting->addAction(actionSave);
 
         retranslateUi(ImageLabelingClass);
+        QObject::connect(othersButton, SIGNAL(clicked()), ImageLabelingClass, SLOT(others_pen()));
+        QObject::connect(cleanButton, SIGNAL(clicked()), ImageLabelingClass, SLOT(clean()));
+        QObject::connect(dentButton, SIGNAL(clicked()), ImageLabelingClass, SLOT(dent_pen()));
+        QObject::connect(crackButton, SIGNAL(clicked()), ImageLabelingClass, SLOT(crack_pen()));
 
         QMetaObject::connectSlotsByName(ImageLabelingClass);
     } // setupUi
@@ -162,12 +239,23 @@ public:
         ImageLabelingClass->setWindowTitle(QApplication::translate("ImageLabelingClass", "ImageLabeling", nullptr));
         actionLoad->setText(QApplication::translate("ImageLabelingClass", "Load", nullptr));
         actionSave->setText(QApplication::translate("ImageLabelingClass", "Save", nullptr));
+        label->setText(QApplication::translate("ImageLabelingClass", "Image file list", nullptr));
+
+        const bool __sortingEnabled = listWidget->isSortingEnabled();
+        listWidget->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
+        ___qlistwidgetitem->setText(QApplication::translate("ImageLabelingClass", "\346\226\260\345\273\272\351\241\271\347\233\256", nullptr));
+        QListWidgetItem *___qlistwidgetitem1 = listWidget->item(1);
+        ___qlistwidgetitem1->setText(QApplication::translate("ImageLabelingClass", "\346\226\260\345\273\272\351\241\271\347\233\256", nullptr));
+        listWidget->setSortingEnabled(__sortingEnabled);
+
         groupBox->setTitle(QApplication::translate("ImageLabelingClass", "Tools", nullptr));
-        dentButton->setText(QApplication::translate("ImageLabelingClass", "dent", nullptr));
         cleanButton->setText(QApplication::translate("ImageLabelingClass", "Clean", nullptr));
-        othersButton->setText(QApplication::translate("ImageLabelingClass", "others", nullptr));
+        dentButton->setText(QApplication::translate("ImageLabelingClass", "dent", nullptr));
         crackButton->setText(QApplication::translate("ImageLabelingClass", "crack", nullptr));
-        label_2->setText(QApplication::translate("ImageLabelingClass", "Image List", nullptr));
+        othersButton->setText(QApplication::translate("ImageLabelingClass", "others", nullptr));
+        pushButton->setText(QApplication::translate("ImageLabelingClass", "Before", nullptr));
+        pushButton_2->setText(QApplication::translate("ImageLabelingClass", "After", nullptr));
         menuSetting->setTitle(QApplication::translate("ImageLabelingClass", "Setting", nullptr));
     } // retranslateUi
 
